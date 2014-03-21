@@ -1,0 +1,32 @@
+{
+  "name": "Search",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "A Search",
+  "icons":{
+    "48": "icon.png"
+  },
+
+  "background": {
+    "scripts": ["events.js"],
+    "persistent": false
+  },
+
+  "permissions": [
+    "webNavigation"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://www.google.com/*", 
+                  "*://www.bing.com/*", 
+                  "*://www.youtube.com/*",
+                  "*://*.wikipedia.org/*",
+                  "*://*.yahoo.com/*"],
+      "css": ["content.css"],
+      "js": ["jquery.js", "content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
