@@ -1,0 +1,10 @@
+#testLess .less-class {
+  display: none;
+}
+
+#test2 {
+  font-size: 1em;
+}
+#test2 .less2-class {
+  display: hidden;
+}
