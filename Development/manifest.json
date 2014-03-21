@@ -1,14 +1,14 @@
 {
-  "name": "Search",
-  "version": "2.0",
+  "name": "SearchSwitch",
+  "version": "2.1",
   "manifest_version": 2,
-  "description": "A Search",
+  "description": "A way to switch to any other search you want whenever you want.",
   "icons":{
-    "48": "icon.png"
+    "48": "images/icon.png"
   },
 
   "background": {
-    "scripts": ["events.js"],
+    "page": "background.html",
     "persistent": false
   },
 
@@ -23,8 +23,8 @@
                   "*://www.youtube.com/*",
                   "*://*.wikipedia.org/*",
                   "*://*.yahoo.com/*"],
-      "css": ["content.css"],
-      "js": ["jquery.js", "content.js"],
+      "css": ["css/ss_main.css"],
+      "js": ["js/jquery.min.js", "js/ss_content.js"],
       "run_at": "document_idle",
       "all_frames": true
     }

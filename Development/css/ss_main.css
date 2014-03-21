@@ -1,10 +1,41 @@
-#testLess .less-class {
+#extSearchContainer #extSearchBar {
+  background-color: #f6f6f6;
+  border: 2px solid #333333;
+  border-top-width: 0px;
+  width: 80%;
+  margin-left: 10%;
+  padding: 5px 0px;
+  font-size: 14px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
   display: none;
 }
-
-#test2 {
-  font-size: 1em;
+#extSearchContainer #extSearchBar ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  line-height: 1em;
 }
-#test2 .less2-class {
-  display: hidden;
+#extSearchContainer #extSearchBar ul li {
+  display: inline;
+}
+#extSearchContainer #extSearchBar ul li.selected a {
+  background-color: #333333;
+  color: #f6f6f6;
+  font-weight: bold;
+}
+#extSearchContainer #extSearchBar a {
+  padding: 5px 20px;
+  color: #333333;
+  text-decoration: none;
+}
+#extSearchContainer #extMouseBar {
+  height: 15px;
+  width: 100%;
+}
+#extSearchContainer #extSearchBar.position-top,
+#extSearchContainer #extMouseBar {
+  z-index: 999999999999999999999;
+  position: fixed;
+  top: 0;
 }
