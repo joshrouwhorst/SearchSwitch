@@ -1,6 +1,6 @@
 module.exports = function( grunt ){
 
-  var banner = "/*/r/n *<%= pkg.name %>/r/n *<%= pkg.version %>/r/n *<%= pkg.git %>/r/n */";
+  var banner = "/* <%= pkg.name %> / <%= pkg.version %> / <%= pkg.git %> */";
 
   grunt.initConfig({
     pkg: grunt.file.readJSON( 'package.json' ),
@@ -68,6 +68,10 @@ module.exports = function( grunt ){
           {
             src: 'Development/js/**/*content*.js',
             dest: 'Development/tmp/<%= pkg.prefix %>content-concat.js'
+          },
+          {
+            src: 'Development/js/popup/**/*.js',
+            dest: 'Development/js/popup.js'
           }
         ]
       }
@@ -86,6 +90,10 @@ module.exports = function( grunt ){
           {
             src: 'Development/tmp/*content-concat.js',
             dest: 'Production/js/<%= pkg.prefix %>content.js'
+          },
+          {
+            src: 'Development/js/popup.js',
+            dest: 'Production/js/popup.js'
           }
         ]
       }

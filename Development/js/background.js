@@ -240,6 +240,10 @@ SearchExtension.main = function( url ){
     SearchExtension.log( "Page is a " + page.selectedSearch.name + " search." );
   }
 
+  chrome.tabs.getSelected( null, function( tab ){
+    chrome.pageAction.show( tab.id );
+  });
+
   for ( var i = 0; i < searches.length; i++ ){
     page.searches.push( searches[i].getJSON( page ) );
   }

@@ -11,6 +11,7 @@
   padding: 5px 0px;
   font-size: 14px;
   display: none;
+  font-family: arial, sans-serif;
 }
 #ssSearchContainer #ssSearchBar.ss-unround {
   border-bottom-left-radius: 0px;
@@ -28,7 +29,6 @@
   position: absolute;
   display: none;
   margin-top: 5px;
-  margin-left: -2px;
 }
 #ssSearchContainer #ssSearchBar ul.ss-sub-search li {
   padding: 5px 20px;
@@ -40,12 +40,22 @@
   margin: 0px;
   padding: 0px;
   list-style-type: none;
-  line-height: 1em;
+  line-height: 1.2;
+  list-style-image: none;
+}
+@media screen {
+  #ssSearchContainer #ssSearchBar ul {
+    margin: 0px;
+    padding: 0px;
+  }
 }
 #ssSearchContainer #ssSearchBar ul:after {
   content: "";
   clear: both;
   display: block;
+}
+#ssSearchContainer #ssSearchBar ul li:first-child ul.ss-sub-search {
+  margin-left: -2px;
 }
 #ssSearchContainer #ssSearchBar ul li {
   float: left;
@@ -53,15 +63,26 @@
 #ssSearchContainer #ssSearchBar ul li:hover ul.ss-sub-search {
   display: block;
 }
+@media screen {
+  #ssSearchContainer #ssSearchBar ul li {
+    margin-bottom: 0px;
+  }
+}
 #ssSearchContainer #ssSearchBar ul li:hover,
 #ssSearchContainer #ssSearchBar ul li:hover > a {
-  background-color: #dddddd;
+  background-color: #8ab9ec;
   font-color: #333333;
+  border-radius: 2px;
 }
 #ssSearchContainer #ssSearchBar ul li:last-child {
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
 }
+#ssSearchContainer #ssSearchBar ul li.selected a {
+  border: 2px solid #333333;
+}
+#ssSearchContainer #ssSearchBar ul li.ss-selected,
+#ssSearchContainer #ssSearchBar ul li.ss-selected:hover,
 #ssSearchContainer #ssSearchBar ul li.ss-selected > a,
 #ssSearchContainer #ssSearchBar ul li.ss-selected:hover > a,
 #ssSearchContainer #ssSearchBar ul li.ss-selected ul.ss-sub-search li,
@@ -71,6 +92,7 @@
   background-color: #333333;
   color: #f6f6f6;
   font-weight: bold;
+  border-radius: 0px;
 }
 #ssSearchContainer #ssSearchBar ul li.ss-selected ul.ss-sub-search,
 #ssSearchContainer #ssSearchBar ul li.ss-selected:hover ul.ss-sub-search {

@@ -1,6 +1,6 @@
 @dark: #333;
 @light: #F6F6F6;
-@mid: #DDD;
+@mid: #8AB9EC;
 
 .link-padding {
   padding: 5px 20px;
@@ -20,6 +20,8 @@
     font-size: 14px;
     display: none;
 
+    font-family: arial,sans-serif;
+
     &.ss-unround{
       border-bottom-left-radius: 0px;
     }
@@ -38,7 +40,6 @@
       position: absolute;
       display: none;
       margin-top: 5px;
-      margin-left: -2px;  
 
       li {
         .link-padding();
@@ -52,12 +53,24 @@
       margin: 0px;
       padding: 0px;
       list-style-type: none;
-      line-height: 1em;
+      line-height: 1.2;
+      list-style-image: none;
+
+      @media screen{
+        margin: 0px;
+        padding: 0px;
+      }
 
       &:after {
         content: "";
         clear: both;
         display: block;
+      }
+
+      & li:first-child{
+        ul.ss-sub-search{
+          margin-left: -2px;
+        }
       }
 
       li {
@@ -66,25 +79,36 @@
         &:hover ul.ss-sub-search{
           display: block;
         }
+
+        @media screen{
+          margin-bottom: 0px; 
+        }
       }
 
       li:hover{
         &, > a{
           background-color: @mid;
           font-color: @dark;
+          border-radius: 2px;
         }
       }
 
       li:last-child{
-        .border-radius();
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+      }
+
+      li.selected a{
+        border: 2px solid @dark;
       }
 
       li.ss-selected, li.ss-selected:hover {
         
-        & > a, ul.ss-sub-search li, ul.ss-sub-search li a {
+        &, & > a, ul.ss-sub-search li, ul.ss-sub-search li a {
           background-color: @dark;
           color: @light;
           font-weight: bold;
+          border-radius: 0px;
         }
 
         ul.ss-sub-search{

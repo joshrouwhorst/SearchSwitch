@@ -1,7 +1,7 @@
 {
   "name": "search-switch",
   "version": "0.1.0",
-  "prefix": "ss_",
+  "prefix": "",
   "git": "https://github.com/joshrouwhorst/SearchSwitch",
   "devDependencies": {
     "grunt": "^0.4.4",
