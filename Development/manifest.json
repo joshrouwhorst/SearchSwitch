@@ -28,5 +28,10 @@
       "run_at": "document_idle",
       "all_frames": true
     }
+  ],
+
+  "web_accessible_resources": [
+    "js/jquery.min.map",
+    "js/ss_source.map"
   ]
 }

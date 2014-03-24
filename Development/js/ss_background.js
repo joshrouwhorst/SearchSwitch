@@ -17,7 +17,33 @@ SearchExtension.searchConfigs = [
     url: "www.google.com",
     queryVariable: "q",
     resultsPage: '#',
-    encodingFunction: SearchExtension.encodings.standard
+    encodingFunction: SearchExtension.encodings.standard,
+    subSearches: [
+      {
+        name: 'Images',
+        url: 'www.google.com',
+        queryVariable: 'q',
+        resultsPage: '#',
+        encodingFunction: SearchExtension.encodings.standard,
+        getQuery: function( queryString ){
+          queryString = this.encodingFunction( queryString );
+
+          return "http://" + this.url + "/" + this.resultsPage + this.queryVariable + "=" + queryString + "&tbm=isch";
+        }
+      },
+      {
+        name: 'Videos',
+        url: 'www.google.com',
+        queryVariable: 'q',
+        resultsPage: '#',
+        encodingFunction: SearchExtension.encodings.standard,
+        getQuery: function( queryString ){
+          queryString = this.encodingFunction( queryString );
+
+          return "http://" + this.url + "/" + this.resultsPage + this.queryVariable + "=" + queryString + "&tbm=vid";
+        }
+      }
+    ]
   },
   {
     name: "YouTube",
@@ -87,14 +113,31 @@ SearchExtension.searchConfigs = [
     url: "www.bing.com",
     queryVariable: 'q',
     resultsPage: 'search?',
-    encodingFunction: SearchExtension.encodings.pluses
+    encodingFunction: SearchExtension.encodings.pluses,
+    subSearches: [
+      {
+        name: "Images",
+        url: "www.bing.com",
+        queryVariable: 'q',
+        resultsPage: 'images/search?',
+        encodingFunction: SearchExtension.encodings.pluses
+      },
+      {
+        name: "Videos",
+        url: "www.bing.com",
+        queryVariable: 'q',
+        resultsPage: 'videos/search?',
+        encodingFunction: SearchExtension.encodings.pluses
+      }
+    ]
   }
 ];
 
 SearchExtension.searches = [];
 
 SearchExtension.Search = function( opts ){
-  var that = this;
+  var that = this,
+      subSearches = [];
 
   that.checkUrl = function( url ){
     var regex = new RegExp( "http(?:s)?:\/\/" + that.url, "g" );
@@ -137,8 +180,39 @@ SearchExtension.Search = function( opts ){
     return "http://" + that.url + "/" + that.resultsPage + that.queryVariable + "=" + queryString;
   };
 
+  that.getSubSearches = function(){
+    return subSearches;
+  };
+
+  that.getJSON = function( page ){
+    var returnObj = {
+      name: that.name,
+      url: that.getQuery( page.query ),
+      currentSearch: (page.selectedSearch === that),
+      subSearches: []
+    };
+
+    if ( subSearches.length > 0 ){
+      for ( var i = 0; i < subSearches.length; i++ ){
+        returnObj.subSearches.push( subSearches[i].getJSON( page ) );
+      }
+    }
+
+    return returnObj;
+  };
+
   for ( var attr in opts ){
+    if ( attr === 'subSearches' ) {
+      continue;
+    }
+
     that[ attr ] = opts[ attr ];
+  }
+
+  if ( opts.subSearches && opts.subSearches.length > 0 ){
+    for ( var i = 0; i < opts.subSearches.length; i++ ){
+      subSearches.push( new SearchExtension.Search( opts.subSearches[i] ) );
+    }
   }
 
   if ( that.queryVariable && !that.queryStringRegex ){
@@ -167,11 +241,7 @@ SearchExtension.main = function( url ){
   }
 
   for ( var i = 0; i < searches.length; i++ ){
-    page.searches.push({
-      name: searches[i].name,
-      url: searches[i].getQuery( page.query ),
-      currentSearch: (page.selectedSearch === searches[i])
-    });
+    page.searches.push( searches[i].getJSON( page ) );
   }
 
   return page;

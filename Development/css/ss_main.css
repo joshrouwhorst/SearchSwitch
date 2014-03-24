@@ -1,40 +1,92 @@
-#extSearchContainer #extSearchBar {
-  background-color: #f6f6f6;
-  border: 2px solid #333333;
-  border-top-width: 0px;
+.link-padding {
+  padding: 5px 20px;
+}
+.border-radius {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+#ssSearchContainer #ssSearchBar {
   width: 80%;
   margin-left: 10%;
   padding: 5px 0px;
   font-size: 14px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
   display: none;
 }
-#extSearchContainer #extSearchBar ul {
+#ssSearchContainer #ssSearchBar.ss-unround {
+  border-bottom-left-radius: 0px;
+}
+#ssSearchContainer #ssSearchBar,
+#ssSearchContainer #ssSearchBar ul.ss-sub-search {
+  border: 2px solid #333333;
+  border-top-width: 0px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #f6f6f6;
+}
+#ssSearchContainer #ssSearchBar ul.ss-sub-search {
+  width: 150px;
+  position: absolute;
+  display: none;
+  margin-top: 5px;
+  margin-left: -2px;
+}
+#ssSearchContainer #ssSearchBar ul.ss-sub-search li {
+  padding: 5px 20px;
+  display: block;
+  position: relative;
+  float: none;
+}
+#ssSearchContainer #ssSearchBar ul {
   margin: 0px;
   padding: 0px;
   list-style-type: none;
   line-height: 1em;
 }
-#extSearchContainer #extSearchBar ul li {
-  display: inline;
+#ssSearchContainer #ssSearchBar ul:after {
+  content: "";
+  clear: both;
+  display: block;
 }
-#extSearchContainer #extSearchBar ul li.selected a {
+#ssSearchContainer #ssSearchBar ul li {
+  float: left;
+}
+#ssSearchContainer #ssSearchBar ul li:hover ul.ss-sub-search {
+  display: block;
+}
+#ssSearchContainer #ssSearchBar ul li:hover,
+#ssSearchContainer #ssSearchBar ul li:hover > a {
+  background-color: #dddddd;
+  font-color: #333333;
+}
+#ssSearchContainer #ssSearchBar ul li:last-child {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+#ssSearchContainer #ssSearchBar ul li.ss-selected > a,
+#ssSearchContainer #ssSearchBar ul li.ss-selected:hover > a,
+#ssSearchContainer #ssSearchBar ul li.ss-selected ul.ss-sub-search li,
+#ssSearchContainer #ssSearchBar ul li.ss-selected:hover ul.ss-sub-search li,
+#ssSearchContainer #ssSearchBar ul li.ss-selected ul.ss-sub-search li a,
+#ssSearchContainer #ssSearchBar ul li.ss-selected:hover ul.ss-sub-search li a {
   background-color: #333333;
   color: #f6f6f6;
   font-weight: bold;
 }
-#extSearchContainer #extSearchBar a {
+#ssSearchContainer #ssSearchBar ul li.ss-selected ul.ss-sub-search,
+#ssSearchContainer #ssSearchBar ul li.ss-selected:hover ul.ss-sub-search {
+  background-color: #333333;
+}
+#ssSearchContainer #ssSearchBar a {
   padding: 5px 20px;
   color: #333333;
   text-decoration: none;
 }
-#extSearchContainer #extMouseBar {
+#ssSearchContainer #ssMouseBar {
   height: 15px;
   width: 100%;
 }
-#extSearchContainer #extSearchBar.position-top,
-#extSearchContainer #extMouseBar {
+#ssSearchContainer #ssSearchBar.ss-position-top,
+#ssSearchContainer #ssMouseBar {
   z-index: 999999999999999999999;
   position: fixed;
   top: 0;

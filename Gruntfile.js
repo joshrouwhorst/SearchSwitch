@@ -42,8 +42,15 @@ module.exports = function( grunt ){
       bower: {
         expand: true,
         cwd: 'Development/bower_components',
-        src: [ 'angular/angular.min.*', 'jquery/dist/jquery.min.*'],
+        src: [ 'angular/angular.min.js', 'jquery/dist/jquery.min.js'],
         dest: 'Production/js',
+        flatten: true
+      },
+      dev: {
+        expand: true,
+        cwd: 'Development/bower_components',
+        src: [ 'angular/angular.min.js', 'jquery/dist/jquery.min.js'],
+        dest: 'Development/js',
         flatten: true
       }
     },
@@ -55,11 +62,11 @@ module.exports = function( grunt ){
         },
         files: [
           {
-            src: 'Development/js/background/**/*.js',
+            src: 'Development/js/**/*background*.js',
             dest: 'Development/tmp/<%= pkg.prefix %>background-concat.js'
           },
           {
-            src: 'Development/js/content/**/*.js',
+            src: 'Development/js/**/*content*.js',
             dest: 'Development/tmp/<%= pkg.prefix %>content-concat.js'
           }
         ]
@@ -87,6 +94,15 @@ module.exports = function( grunt ){
       js: ['Development/tmp/**.js'],
       map: ['Development/tmp/**.map'],
       prod: ['Production/**/*']
+    },
+    watch: {
+      autoCompile: {
+        files: ['Development/**'],
+        tasks: ['run'],
+        options: {
+          debounceDelay: 500
+        }
+      }
     }
   });
 
@@ -95,8 +111,9 @@ module.exports = function( grunt ){
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks( 'grunt-contrib-clean' );
+  grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
-  grunt.registerTask( 'dev', ['less:dev'] );
+  grunt.registerTask( 'dev', ['less:dev', 'copy:dev'] );
   grunt.registerTask( 'prod', ['clean:prod', 'less:prod', 'copy', 'concat', 'uglify', 'clean:js', 'clean:map'] );
   grunt.registerTask( 'run', ['dev', 'prod'] );
 };

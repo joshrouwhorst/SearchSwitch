@@ -1,19 +1,52 @@
 @dark: #333;
 @light: #F6F6F6;
+@mid: #DDD;
 
-#extSearchContainer{
+.link-padding {
+  padding: 5px 20px;
+}
+
+.border-radius {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#ssSearchContainer{
   
-  #extSearchBar{
-    background-color: @light;
-    border: 2px solid @dark;
-    border-top-width: 0px;
+  #ssSearchBar{
     width: 80%;
     margin-left: 10%;
     padding: 5px 0px;
     font-size: 14px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
     display: none;
+
+    &.ss-unround{
+      border-bottom-left-radius: 0px;
+    }
+
+    &, ul.ss-sub-search {
+      border: 2px solid @dark;
+      border-top-width: 0px;
+      
+      .border-radius();
+
+      background-color: @light;
+    }
+
+    ul.ss-sub-search {
+      width: 150px;
+      position: absolute;
+      display: none;
+      margin-top: 5px;
+      margin-left: -2px;  
+
+      li {
+        .link-padding();
+        display: block;
+        position: relative;
+        float: none;
+      }
+    }
 
     ul {
       margin: 0px;
@@ -21,33 +54,59 @@
       list-style-type: none;
       line-height: 1em;
 
-      li {
-        display: inline;
+      &:after {
+        content: "";
+        clear: both;
+        display: block;
       }
 
-      li.selected {
-        a {
+      li {
+        float: left;
+
+        &:hover ul.ss-sub-search{
+          display: block;
+        }
+      }
+
+      li:hover{
+        &, > a{
+          background-color: @mid;
+          font-color: @dark;
+        }
+      }
+
+      li:last-child{
+        .border-radius();
+      }
+
+      li.ss-selected, li.ss-selected:hover {
+        
+        & > a, ul.ss-sub-search li, ul.ss-sub-search li a {
           background-color: @dark;
           color: @light;
           font-weight: bold;
+        }
+
+        ul.ss-sub-search{
+          background-color: @dark;
         }
       }
     }
 
     a {
-      padding: 5px 20px;
+      .link-padding();
       color: @dark;
       text-decoration: none;
     }
   }
 
-  #extMouseBar {
+  #ssMouseBar {
     height: 15px;
     width: 100%;
   }
 
-  #extSearchBar.position-top, 
-  #extMouseBar{
+  #ssSearchBar.ss-position-top, 
+  #ssMouseBar{
     z-index: 999999999999999999999;
     position: fixed;
     top: 0;
