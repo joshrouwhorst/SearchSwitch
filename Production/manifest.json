@@ -4,7 +4,18 @@
   "manifest_version": 2,
   "description": "A way to switch to any other search you want whenever you want.",
   "icons":{
-    "48": "images/icon.png"
+    "19": "images/icon19.png",
+    "38": "images/icon38.png",
+    "128": "images/icon128.png"
+  },
+
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "SearchSwitch",
+    "default_popup": "html/popup.html"
   },
 
   "background": {
@@ -23,15 +34,10 @@
                   "*://www.youtube.com/*",
                   "*://*.wikipedia.org/*",
                   "*://*.yahoo.com/*"],
-      "css": ["css/ss_main.css"],
-      "js": ["js/jquery.min.js", "js/ss_content.js"],
+      "css": ["css/main.css"],
+      "js": ["js/jquery.min.js", "js/content.js"],
       "run_at": "document_idle",
       "all_frames": true
     }
-  ],
-
-  "web_accessible_resources": [
-    "js/jquery.min.map",
-    "js/ss_source.map"
   ]
 }
