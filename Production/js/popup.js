@@ -1,2 +1,2 @@
-var SearchSwitch=angular.module("SearchSwitch",[]);SearchSwitch.controller("HomeCtrl",["$scope",function(){}]);
+!function(){var a=angular.module("SearchSwitch",[]);a.controller("HomeCtrl",["$scope","BackgroundPage",function(a,b){a.searches=b.searches}])}(),function(){var a=angular.module("SearchSwitch",[]);a.factory("BackgroundPage",[function(){var a=chrome.extension.getBackgroundPage();return a&&a.SearchSwitch?a.SearchSwitch:!1}])}();
 //# sourceMappingURL=source.map
