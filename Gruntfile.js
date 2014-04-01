@@ -42,14 +42,14 @@ module.exports = function( grunt ){
       bower: {
         expand: true,
         cwd: 'Development/bower_components',
-        src: [ 'angular/angular.min.js', 'jquery/dist/jquery.min.js'],
+        src: [ 'angular/angular.min.js', 'jquery/dist/jquery.min.js', 'angular-route/angular-route.min.js' ],
         dest: 'Production/js',
         flatten: true
       },
       dev: {
         expand: true,
         cwd: 'Development/bower_components',
-        src: [ 'angular/angular.min.js', 'jquery/dist/jquery.min.js'],
+        src: [ 'angular/angular.min.js', 'jquery/dist/jquery.min.js', 'angular-route/angular-route.min.js' ],
         dest: 'Development/js',
         flatten: true
       }
@@ -104,11 +104,15 @@ module.exports = function( grunt ){
       prod: ['Production/**/*']
     },
     watch: {
+      js: {
+        files: ['Development/js/**/*.js']
+      },
       autoCompile: {
         files: ['Development/**'],
         tasks: ['run'],
         options: {
-          debounceDelay: 500
+          debounceDelay: 500,
+          reload: true
         }
       }
     }

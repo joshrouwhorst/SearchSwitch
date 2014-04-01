@@ -1,19 +1,21 @@
-/* search-switch / 0.1.0 / https://github.com/joshrouwhorst/SearchSwitch */(function(){
+/* search-switch / 0.1.0 / https://github.com/joshrouwhorst/SearchSwitch */angular.module('SearchSwitch', [ 'ngRoute' ])
 
-var SearchSwitch = angular.module( 'SearchSwitch', [] );
+.config(['$routeProvider', function( $routeProvider ) {
 
-SearchSwitch.controller( 'HomeCtrl', ['$scope', 'BackgroundPage', function($scope, BackgroundPage){
-  
-  $scope.searches = BackgroundPage.searches;
+  $routeProvider
+    .otherwise({
+      redirectTo: 'views/homescreen.html'
+    });
 
 }]);
+angular.module( 'SearchSwitch' )
 
-})();
-(function(){
+.controller( 'HomeScreenCtrl', ['$scope', 'BackgroundPageService', function($scope, BackgroundPageService){
+  $scope.BackgroundPageService = BackgroundPageService;
+}]);
+angular.module( 'SearchSwitch' )
 
-var SearchSwitch = angular.module( 'SearchSwitch', [] );
-
-SearchSwitch.factory( 'BackgroundPage', [function(){
+.factory('BackgroundPageService', [function(){
   var backgroundPage = chrome.extension.getBackgroundPage();
 
   if ( backgroundPage && backgroundPage.SearchSwitch ) {
@@ -23,7 +25,3 @@ SearchSwitch.factory( 'BackgroundPage', [function(){
   }
 
 }]);
-
-})();
-
-

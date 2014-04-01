@@ -1,8 +1,6 @@
-(function(){
+angular.module( 'SearchSwitch' )
 
-var SearchSwitch = angular.module( 'SearchSwitch', [] );
-
-SearchSwitch.factory( 'BackgroundPage', [function(){
+.factory('BackgroundPageService', [function(){
   var backgroundPage = chrome.extension.getBackgroundPage();
 
   if ( backgroundPage && backgroundPage.SearchSwitch ) {
@@ -12,7 +10,3 @@ SearchSwitch.factory( 'BackgroundPage', [function(){
   }
 
 }]);
-
-})();
-
-

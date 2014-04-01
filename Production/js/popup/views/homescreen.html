@@ -1,0 +1,7 @@
+<div ng-controller="HomeScreenCtrl">
+  <ul>
+    <li ng-repeat="search in searches">
+      <input type="checkbox" ng-model="search.selected" ng-checked="search.selected">
+      {{search.name}}
+    </li>
+</div>
