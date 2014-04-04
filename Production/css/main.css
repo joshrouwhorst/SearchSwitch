@@ -113,3 +113,8 @@
   position: fixed;
   top: 0;
 }
+
+body {
+  height: 300px;
+  width: 300px;
+}

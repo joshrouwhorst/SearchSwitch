@@ -3,15 +3,19 @@
 .config(['$routeProvider', function( $routeProvider ) {
 
   $routeProvider
+    .when('/', {
+      templateUrl: 'html/partials/home.html'
+    })
     .otherwise({
-      redirectTo: 'views/homescreen.html'
+      redirectTo: '/'
     });
 
 }]);
 angular.module( 'SearchSwitch' )
 
-.controller( 'HomeScreenCtrl', ['$scope', 'BackgroundPageService', function($scope, BackgroundPageService){
+.controller( 'HomeCtrl', ['$scope', 'BackgroundPageService', function($scope, BackgroundPageService){
   $scope.BackgroundPageService = BackgroundPageService;
+  $scope.searches = BackgroundPageService.searches;
 }]);
 angular.module( 'SearchSwitch' )
 

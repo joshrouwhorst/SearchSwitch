@@ -11,8 +11,12 @@ module.exports = function( grunt ){
         },
         files: [
           {
-            src: [ "Development/less/**/*.less" ],
+            src: [ "Development/less/main.less" ],
             dest: "Development/css/<%= pkg.prefix %>main.css"
+          },
+          {
+            src: [ 'Development/less/popup.less' ],
+            dest: 'Development/css/<%= pkg.prefix %>popup.css'
           }
         ]
       },
