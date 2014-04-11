@@ -24,7 +24,8 @@
   },
 
   "permissions": [
-    "webNavigation"
+    "webNavigation",
+    "storage"
   ],
 
   "content_scripts": [

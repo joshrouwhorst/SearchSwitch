@@ -1,3 +1,14 @@
+angular.module( 'SearchSwitch' )
+
+.run(function(SearchService, InitialData){
+  // Checking if initial values need to be set,
+  // theoretically this would just be ran the first 
+  // time someone runs the extension.
+
+  SearchService.checkInitialValues();
+
+});
+
 var SearchSwitch = {
   encodings: {}
 };
