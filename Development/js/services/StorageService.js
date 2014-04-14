@@ -3,48 +3,49 @@ angular.module('SearchSwitch')
 .factory('StorageService', function(){
   var onSearchChangedFuncs = [];
 
-  var setSearches = function( options ){
-    chrome.storage.sync.set({
-      'searches': options.searches
-    }, function(){
+  var modules = [];
+
+  var onChanged = function( options ){
+    modules[ options.name ] = options;
+  };
+
+  var set = function( options ){
+    var setOpts = {},
+        syncLocal = options.sync ? 'sync': 'local';
+
+    setOpts[ options.name ] = options.data;
+
+    chrome.storage[ syncLocal ].set( setOpts, function(){
       if (options.callback){
         options.callback();
       }
     });
   };
 
-  var onSearchChanged = function( func ){
-    onSearchChangedFuncs.push( func );
-  };
+  var get = function( options ){
+    var syncLocal = options.sync ? 'sync': 'local';
 
-  var getSearches = function(){
-    return chrome.storage.sync.get('searches');
-  };
-
-  var callSearchChanged = function( changes ){
-    for ( var i = 0; i < onSearchChangedFuncs.length; i++ ){
-      onSearchChangedFuncs[i]( changes.newValue );
-    }
+    return chrome.storage[ syncLocal ].get( options.name );
   };
 
   chrome.storage.onChanged.addListener(function( changes, namespace ){
+    var type, i;
 
-    for ( var type in changes ){
-      switch ( type ){
-        case 'searches':
-          callSearchChanged( changes[type] );
-          break;
+    for ( type in changes ){
 
-        default:
-          break;
+      if ( modules[type] &&
+           modules[type].onChanged ){
+        for ( i = 0; i < modules[type].onChanged.length; i++ ){
+          modules[type].onChanged[i]( changes[type] );
+        }
       }
     }
   });
 
 
   return {
-    setSearches: setSearches,
-    onSearchChanged: onSearchChanged,
-    getSearches: getSearches
+    onChanged: onChanged,
+    set: set,
+    get: get
   };
 });

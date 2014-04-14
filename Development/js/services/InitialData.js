@@ -9,6 +9,7 @@ angular.module('SearchSwitch')
       queryVariable: "q",
       resultsPage: '#',
       encodingFunction: SearchSwitch.encodings.standard,
+      view: true,
       subSearches: [
         {
           name: 'Images',
@@ -41,12 +42,14 @@ angular.module('SearchSwitch')
       url: "www.youtube.com",
       queryVariable: 'search_query',
       resultsPage: 'results?',
+      view: true,
       encodingFunction: SearchSwitch.encodings.standard
     },
     {
       name: 'Wikipedia',
       url: 'wikipedia.org',
       resultsPage: 'wiki/',
+      view: true,
       encodingFunction: function( query ){
         query = query.replace( / /g, '_');
         query = encodeURIComponent( query );
@@ -97,6 +100,7 @@ angular.module('SearchSwitch')
       url: "search.yahoo.com",
       queryVariable: "p",
       resultsPage: "search?",
+      view: true,
       encodingFunction: SearchSwitch.encodings.pluses
     },
     {
@@ -104,6 +108,7 @@ angular.module('SearchSwitch')
       url: "www.bing.com",
       queryVariable: 'q',
       resultsPage: 'search?',
+      view: true,
       encodingFunction: SearchSwitch.encodings.pluses,
       subSearches: [
         {
@@ -111,6 +116,7 @@ angular.module('SearchSwitch')
           url: "www.bing.com",
           queryVariable: 'q',
           resultsPage: 'images/search?',
+          view: true,
           encodingFunction: SearchSwitch.encodings.pluses
         },
         {
@@ -118,6 +124,7 @@ angular.module('SearchSwitch')
           url: "www.bing.com",
           queryVariable: 'q',
           resultsPage: 'videos/search?',
+          view: true,
           encodingFunction: SearchSwitch.encodings.pluses
         }
       ]
