@@ -1,6 +1,15 @@
 angular.module('SearchSwitch')
 
-.factory('InitialDataService', function(){
+.factory('InitialDataService', function( LogService ){
+  var encodings = {
+        standard: encodeURIComponent,
+        pluses: function( query ){
+          query = query.replace( / /g, '+' );
+          query = encodeURI( query );
+
+          return query;
+        }
+      };
 
   var searches = [
     {
@@ -8,7 +17,7 @@ angular.module('SearchSwitch')
       url: "www.google.com",
       queryVariable: "q",
       resultsPage: '#',
-      encodingFunction: SearchSwitch.encodings.standard,
+      encodingFunction: encodings.standard,
       view: true,
       subSearches: [
         {
@@ -16,7 +25,7 @@ angular.module('SearchSwitch')
           url: 'www.google.com',
           queryVariable: 'q',
           resultsPage: '#',
-          encodingFunction: SearchSwitch.encodings.standard,
+          encodingFunction: encodings.standard,
           getQuery: function( queryString ){
             queryString = this.encodingFunction( queryString );
 
@@ -28,7 +37,7 @@ angular.module('SearchSwitch')
           url: 'www.google.com',
           queryVariable: 'q',
           resultsPage: '#',
-          encodingFunction: SearchSwitch.encodings.standard,
+          encodingFunction: encodings.standard,
           getQuery: function( queryString ){
             queryString = this.encodingFunction( queryString );
 
@@ -43,7 +52,7 @@ angular.module('SearchSwitch')
       queryVariable: 'search_query',
       resultsPage: 'results?',
       view: true,
-      encodingFunction: SearchSwitch.encodings.standard
+      encodingFunction: encodings.standard
     },
     {
       name: 'Wikipedia',
@@ -66,11 +75,11 @@ angular.module('SearchSwitch')
         return false;
       },
       getQueryValue: function( url ){
-        SearchSwitch.log( "Getting query value of " + url );
+        LogService.output( "Getting query value of " + url );
 
         var query = url.match( /wiki\/([^?]+)/g );
 
-        SearchSwitch.log( "Query value - " + query );
+        LogService.output( "Query value - " + query );
 
         if ( query && query.length > 0 ){
           query = query[ query.length - 1 ];
@@ -101,7 +110,7 @@ angular.module('SearchSwitch')
       queryVariable: "p",
       resultsPage: "search?",
       view: true,
-      encodingFunction: SearchSwitch.encodings.pluses
+      encodingFunction: encodings.pluses
     },
     {
       name: "Bing",
@@ -109,7 +118,7 @@ angular.module('SearchSwitch')
       queryVariable: 'q',
       resultsPage: 'search?',
       view: true,
-      encodingFunction: SearchSwitch.encodings.pluses,
+      encodingFunction: encodings.pluses,
       subSearches: [
         {
           name: "Images",
@@ -117,7 +126,7 @@ angular.module('SearchSwitch')
           queryVariable: 'q',
           resultsPage: 'images/search?',
           view: true,
-          encodingFunction: SearchSwitch.encodings.pluses
+          encodingFunction: encodings.pluses
         },
         {
           name: "Videos",
@@ -125,7 +134,7 @@ angular.module('SearchSwitch')
           queryVariable: 'q',
           resultsPage: 'videos/search?',
           view: true,
-          encodingFunction: SearchSwitch.encodings.pluses
+          encodingFunction: encodings.pluses
         }
       ]
     }

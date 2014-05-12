@@ -74,7 +74,7 @@ module.exports = function( grunt ){
             dest: 'Development/tmp/<%= pkg.prefix %>content-concat.js'
           },
           {
-            src: 'Development/js/popup/**/*.js',
+            src: 'Development/js/**/*.js',
             dest: 'Development/js/popup.js'
           }
         ]
@@ -111,6 +111,9 @@ module.exports = function( grunt ){
       js: {
         files: ['Development/js/**/*.js']
       },
+      less: {
+        files: ['Development/less/**/*.less']
+      },
       autoCompile: {
         files: ['Development/**'],
         tasks: ['run'],
@@ -132,4 +135,6 @@ module.exports = function( grunt ){
   grunt.registerTask( 'dev', ['less:dev', 'copy:dev'] );
   grunt.registerTask( 'prod', ['clean:prod', 'less:prod', 'copy', 'concat', 'uglify', 'clean:js', 'clean:map'] );
   grunt.registerTask( 'run', ['dev', 'prod'] );
+
+  grunt.registerTask( 'live', ['run', 'watch'] );
 };
